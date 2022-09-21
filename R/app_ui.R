@@ -20,7 +20,7 @@ app_ui <- function() {
       shiny::tabPanel(
         "Environment",
         rapbase::navbarWidgetInput("rapadm-widget"),
-        h4("Test 'rapbase' functions using the session object:"),
+        shiny::h4("Test 'rapbase' functions using the session object:"),
         shiny::textOutput("user"),
         shiny::textOutput("group"),
         shiny::textOutput("resh_id"),
@@ -28,11 +28,11 @@ app_ui <- function() {
         shiny::textOutput("email"),
         shiny::textOutput("full_name"),
         shiny::textOutput("phone"),
-        h4("Environment var R_RAP_INSTANCE:"),
+        shiny::h4("Environment var R_RAP_INSTANCE:"),
         shiny::textOutput("instance"),
-        h4("Environmental var R_RAP_CONFIG_PATH:"),
+        shiny::h4("Environmental var R_RAP_CONFIG_PATH:"),
         shiny::textOutput("config_path"),
-        h4("Locale settings:"),
+        shiny::h4("Locale settings:"),
         shiny::textOutput("locale")
       ),
 
@@ -54,17 +54,54 @@ app_ui <- function() {
             shiny::uiOutput("container_log_ui")
           ),
           shiny::mainPanel(
-            shiny::uiOutput("container_log")
+            shiny::verbatimTextOutput("container_log")
           )
         )
       ),
 
       shiny::tabPanel(
-        "Usestats"
+        "Usestats",
+        shiny::sidebarLayout(
+          shiny::sidebarPanel(
+            shiny::radioButtons(
+              "type",
+              label = shiny::tags$div(
+                shiny::HTML(as.character(shiny::icon("shapes")), "Type:")
+              ),
+              choices = list(Application = "app", Report = "report")
+            ),
+            shiny::radioButtons(
+              "downloadFormat",
+              label = shiny::tags$div(
+                shiny::HTML(as.character(shiny::icon("file-csv")), "File format:")
+              ),
+              choices = c("csv", "xlsx-csv")
+            ),
+            shiny::downloadButton("download", "Download!")
+          ),
+          shiny::mainPanel(
+            rpivotTable::rpivotTableOutput("pivot")
+          )
+        )
       ),
 
       shiny::tabPanel(
-        "Autoreports"
+        "Autoreports",
+        shiny::sidebarLayout(
+          shiny::sidebarPanel(
+            shiny::p("Filter"),
+            shiny::uiOutput("fpackage"),
+            shiny::uiOutput("ftype"),
+            shiny::uiOutput("fowner"),
+            shiny::uiOutput("forganization")
+          ),
+          shiny::mainPanel(
+            shiny::h2("Auto reports running one year from now"),
+            shiny::plotOutput("calendar"),
+            shiny::h2("Auto report raw data"),
+            shiny::verbatimTextOutput("autoreport_data")
+          )
+        )
       )
 
     )
