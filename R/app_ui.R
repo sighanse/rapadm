@@ -30,8 +30,10 @@ app_ui <- function() {
         shiny::textOutput("phone"),
         shiny::h4("Environment var R_RAP_INSTANCE:"),
         shiny::textOutput("instance"),
-        shiny::h4("Environmental var R_RAP_CONFIG_PATH:"),
+        shiny::h4("Environment var R_RAP_CONFIG_PATH:"),
         shiny::textOutput("config_path"),
+        shiny::h4("Environment var(s) provided by SHINYPROXY (if any):"),
+        shiny::textOutput("sp_usergroups"),
         shiny::h4("Locale settings:"),
         shiny::textOutput("locale")
       ),
