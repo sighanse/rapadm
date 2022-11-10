@@ -1,4 +1,4 @@
-FROM rapporteket/base-r:main
+FROM rapporteket/base-r:4.2.1
 
 LABEL maintainer "Are Edvardsen <are.edvardsen@helse-nord.no>"
 LABEL no.rapporteket.cd.enable="true"
