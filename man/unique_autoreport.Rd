@@ -4,12 +4,12 @@
 \alias{unique_autoreport}
 \title{Tools for handling auto report data}
 \usage{
-unique_autoreport(data, entety)
+unique_autoreport(data, entity)
 }
 \arguments{
 \item{data}{List of auto report data}
 
-\item{entety}{A character string defining the entety. Likely one of
+\item{entity}{A character string defining the entity. Likely one of
 \code{c("package", "type", "owner", "organization")}.}
 }
 \value{

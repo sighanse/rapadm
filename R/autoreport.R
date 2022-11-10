@@ -1,7 +1,7 @@
 #' Tools for handling auto report data
 #'
 #' @param data List of auto report data
-#' @param entety A character string defining the entety. Likely one of
+#' @param entity A character string defining the entity. Likely one of
 #'   \code{c("package", "type", "owner", "organization")}.
 #'
 #' @return A character vector of unique values for the entity in question.
@@ -11,10 +11,10 @@
 #' ar <- list(ar1 = list(type = "A"), ar2 = list(type = "B"))
 #' unique_autoreport(ar, "type") # c("A", "B")
 
-unique_autoreport <- function(data, entety) {
+unique_autoreport <- function(data, entity) {
   vals <- vector(mode = "character")
   for (i in seq_len(length(data))) {
-    vals <- c(vals, data[[i]][[entety]])
+    vals <- c(vals, data[[i]][[entity]])
   }
 
   unique(vals)
