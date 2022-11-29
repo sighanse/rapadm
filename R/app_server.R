@@ -9,7 +9,11 @@
 
 app_server <- function(input, output, session) {
 
-  rapbase::navbarWidgetServer("rapadm-widget", orgName = "RapAdm")
+  rapbase::navbarWidgetServer2(
+    "rapadm-widget",
+    orgName = "RapAdm",
+    caller = packageName()
+  )
 
   # Environment
   output$user <- shiny::renderText({

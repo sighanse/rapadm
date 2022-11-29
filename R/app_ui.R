@@ -19,7 +19,7 @@ app_ui <- function() {
 
       shiny::tabPanel(
         "Environment",
-        rapbase::navbarWidgetInput("rapadm-widget"),
+        rapbase::navbarWidgetInput("rapadm-widget", selectOrganization = TRUE),
         shiny::h4("Test 'rapbase' functions using the session object:"),
         shiny::textOutput("user"),
         shiny::textOutput("group"),
