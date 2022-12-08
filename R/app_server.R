@@ -73,7 +73,7 @@ app_server <- function(input, output, session) {
   # Logs
   output$container_log_ui <- shiny::renderUI({
     f <- file.info(
-      list.files("/container_logs", full.names = TRUE)
+      list.files("/container_logs", full.names = TRUE, pattern = "\\.log$")
     )
     f <- f %>%
       dplyr::arrange(dplyr::desc(.data$mtime)) %>%
