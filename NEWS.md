@@ -1,3 +1,7 @@
+# rapadm 0.3.1
+
+* Only files named *.log are selectable in Logs dropdown
+
 # rapadm 0.3.0
 
 * Becoming a Falk friendlier app
