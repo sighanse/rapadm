@@ -1,3 +1,7 @@
+# rapadm 0.4.0
+
+* Updated R version from 4.2.1 to 4.2.2
+
 # rapadm 0.3.1
 
 * Only files named *.log are selectable in Logs dropdown
