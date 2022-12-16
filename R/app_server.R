@@ -133,16 +133,16 @@ app_server <- function(input, output, session) {
   far <- shiny::reactive({
     shiny::req(input$fpackage, input$ftype, input$fowner, input$forganization)
     far <- ar
-    if (input$fpackage != "none") {
+    if (input$fpackage != "no filter") {
       far <- rapbase::filterAutoRep(far, "package", input$fpackage)
     }
-    if (input$ftype != "none") {
+    if (input$ftype != "no filter") {
       far <- rapbase::filterAutoRep(far, "type", input$ftype)
     }
-    if (input$fowner != "none") {
+    if (input$fowner != "no filter") {
       far <- rapbase::filterAutoRep(far, "owner", input$fowner)
     }
-    if (input$forganization != "none") {
+    if (input$forganization != "no filter") {
       far <- rapbase::filterAutoRep(far, "organization", input$forganization)
     }
     far
@@ -152,28 +152,28 @@ app_server <- function(input, output, session) {
     shiny::selectInput(
       "fpackage",
       "- registry:",
-      choices = c("none", unique_autoreport(ar, "package"))
+      choices = c("no filter", unique_autoreport(ar, "package"))
     )
   })
   output$ftype <- shiny::renderUI({
     shiny::selectInput(
       "ftype",
       "- type:",
-      choices = c("none", unique_autoreport(ar, "type"))
+      choices = c("no filter", unique_autoreport(ar, "type"))
     )
   })
   output$fowner <- shiny::renderUI({
     shiny::selectInput(
       "fowner",
       "- owner:",
-      choices = c("none", unique_autoreport(ar, "owner"))
+      choices = c("no filter", unique_autoreport(ar, "owner"))
     )
   })
   output$forganization <- shiny::renderUI({
     shiny::selectInput(
       "forganization",
       "- organization:",
-      choices = c("none", unique_autoreport(ar, "organization"))
+      choices = c("no filter", unique_autoreport(ar, "organization"))
     )
   })
 
@@ -181,13 +181,31 @@ app_server <- function(input, output, session) {
       plot(calendar_autoreport(far()))
   })
 
-  # filters_package <- c("none", unique_autoreport(ar, "package"))
-  # filters_type <- c("none", unique_autoreport(ar, "type"))
-  # filters_owner <- c("none", unique_autoreport(ar, "owner"))
-  # filters_organization <- c("none", unique_autoreport(ar, "organization"))
-
   output$autoreport_data <- shiny::renderText({
     yaml::as.yaml(far())
+  })
+
+  # Staging
+  shiny::observeEvent(input$do_remove, {
+    rapbase::cleanStagingData(0, dryRun = FALSE)
+  })
+  output$remove_staging <- shiny::renderUI({
+    if (input$delete_staging) {
+      shiny::actionButton(
+        "do_remove", "Delete staging data", icon = shiny::icon("trash")
+      )
+    } else {
+      NULL
+    }
+  })
+  output$staging_data <- shiny::renderPrint({
+    input$do_remove
+    res <- rapbase::cleanStagingData(0)
+    if (length(res) < 1) {
+      "There is no staging data."
+    } else {
+      res
+    }
   })
 
 }
