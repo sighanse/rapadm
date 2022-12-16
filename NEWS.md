@@ -1,3 +1,7 @@
+# rapadm 0.5.0
+
+* Added tool for listing and global removal of staging data
+
 # rapadm 0.4.0
 
 * Updated R version from 4.2.1 to 4.2.2
