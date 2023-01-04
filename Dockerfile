@@ -27,7 +27,7 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
 
 EXPOSE 3838
 
-RUN adduser --uid "1000" --disabled-password --no-create-home rapporteket && \
+RUN adduser --uid "1000" --disabled-password rapporteket && \
     chown -R 1000:1000 /app/R && \
     chmod -R 755 /app/R
 USER rapporteket
