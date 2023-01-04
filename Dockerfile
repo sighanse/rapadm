@@ -27,7 +27,9 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
 
 EXPOSE 3838
 
-RUN chown -R 1000:1000 /app/R && \
+RUN adduser --uid "1000" --disabled-password rapporteket && \
+    chown -R 1000:1000 /app/R && \
     chmod -R 755 /app/R
+USER rapporteket
 
 CMD ["R", "-e", "options(shiny.port = 3838, shiny.host = \"0.0.0.0\"); rapadm::run_app()"]
