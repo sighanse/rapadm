@@ -3,6 +3,9 @@ FROM rapporteket/base-r:4.2.2
 LABEL maintainer "Are Edvardsen <are.edvardsen@helse-nord.no>"
 LABEL no.rapporteket.cd.enable="true"
 
+ARG GH_PAT
+ENV GITHUB_PAT=${GH_PAT}
+
 # hadolint ignore=DL3010
 WORKDIR /app/R
 
