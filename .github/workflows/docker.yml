@@ -28,7 +28,7 @@ jobs:
           dockerfile: "Dockerfile"
       - name: Prepare tags
         id: docker_meta
-        uses: docker/metadata-action@v4.1.1
+        uses: docker/metadata-action@v4.3.0
         with:
           images: ${{ env.IMAGE_NAME }}
           tags: |
@@ -52,3 +52,4 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
+          build-args: GH_PAT=${{ secrets.GITHUB_TOKEN }}

@@ -1,3 +1,7 @@
+# rapadm 0.6.0
+
+* Added a dedicated container user (by @sighanse)
+
 # rapadm 0.5.0
 
 * Added tool for listing and global removal of staging data
